@@ -17,17 +17,17 @@ RUN apk add --no-cache \
   automake \
   build-base \
   cmake \
-  curl \
   git \
   libtool \
-  pkgconfig
+  pkgconfig \
+  wget
 
 # set up our home directory
 RUN mkdir -p /root
 ENV HOME /root
 
 # set up Rust
-RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
+RUN wget https://sh.rustup.rs -O - | sh -s -- -y
 
 ENV PATH "${PATH}:$HOME/.cargo/bin"
 RUN cargo --version; rustc --version
