@@ -32,4 +32,4 @@ jobs:
 
     - name: Is http/3 supported?
       run: |
-        docker run --rm macbre/curl3 curl -sIL https://blog.cloudflare.com --http3 -H 'user-agent: mozilla' | grep 'HTTP/3'
+        docker run --rm macbre/curl-http3 curl -sIL https://blog.cloudflare.com --http3 -H 'user-agent: mozilla' | grep 'HTTP/3'
