@@ -1,0 +1,31 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    # https://github.com/marketplace/actions/build-and-push-docker-images
+    - name: Build the Docker image
+      uses: docker/build-push-action@v3
+      with:
+        context: .
+        tags: macbre/curl-http3
+        cache-from: |
+          ghcr.io/macbre/curl-http3:latest
+
+    - name: Inspect images
+      run: |
+        docker images | head -n3
+
+    - name: curl --version
+      run: |
+        docker run -t macbre/curl-http3 curl --version
