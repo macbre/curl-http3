@@ -37,7 +37,9 @@ RUN \
   cd quiche && \
   git submodule init && \
   git submodule update && \
-  cargo build --package quiche --release --features ffi,pkg-config-meta,qlog && \
+  cargo build --package quiche --release --features ffi,pkg-config-meta,qlog
+
+RUN \
   mkdir /opt/quiche/quiche/deps/boringssl/src/lib/ && \
   ln -vnf $(find ./quiche/target/release/build/ -name libcrypto.a -o -name libssl.a) /opt/quiche/quiche/deps/boringssl/src/lib/
 
