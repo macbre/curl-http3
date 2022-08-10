@@ -11,26 +11,24 @@ ARG QUICHE_VERSION=0.14.0
 
 # install dependency
 RUN apk add --no-cache \
+  autoconf \
+  automake \
   build-base \
-  curl \  
-  git
+  cmake \
+  curl \
+  git \
+  libtool \
+  pkgconfig
 
 # set up our home directory
 RUN mkdir -p /root
 ENV HOME /root
 
 # set up Rust
-RUN \
-  curl https://sh.rustup.rs -sSf | sh -s -- -y
-#  rustup-init -y && \
-#  source $HOME/.cargo/env && \
-#  rustup update stable
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 
 ENV PATH "${PATH}:$HOME/.cargo/bin"
 RUN cargo --version; rustc --version
-
-RUN apk add --no-cache \
-  cmake
 
 # @see https://curl.se/docs/http3.html#quiche-version
 RUN \
@@ -39,16 +37,9 @@ RUN \
   cd quiche && \
   git submodule init && \
   git submodule update && \
-  cargo build --package quiche --release --features ffi,pkg-config-meta,qlog
-
-RUN mkdir /opt/quiche/quiche/deps/boringssl/src/lib/ && \
+  cargo build --package quiche --release --features ffi,pkg-config-meta,qlog && \
+  mkdir /opt/quiche/quiche/deps/boringssl/src/lib/ && \
   ln -vnf $(find ./quiche/target/release/build/ -name libcrypto.a -o -name libssl.a) /opt/quiche/quiche/deps/boringssl/src/lib/
-
-RUN apk add --no-cache \
-  autoconf \
-  automake \
-  libtool \
-  pkgconfig
 
 RUN \
   cd /opt && \
@@ -63,4 +54,5 @@ RUN \
 # we do not need root anymore
 USER nobody
 
+# TODO: use multi stages to make the image smaller
 RUN env | sort; which curl; curl --version
