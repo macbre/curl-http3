@@ -4,6 +4,10 @@ ARG CURL_VERSION=curl-7_84_0
 ARG QUICHE_VERSION=0.14.0
 
 FROM alpine:3.14 AS base
+
+ARG CURL_VERSION
+ARG QUICHE_VERSION
+
 LABEL maintainer="macbre <maciej.brencz@gmail.com>"
 WORKDIR /opt
 
