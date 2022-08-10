@@ -1,5 +1,5 @@
 # curl-http3
-A custom `curl` build with `BoringSSL` and http3 support via `quiche`.
+A custom `curl` build with `BoringSSL` and http3 support via `quiche` in **under 50MB container image**.
 
 ```
 curl 7.84.0-DEV (x86_64-pc-linux-musl) libcurl/7.84.0-DEV BoringSSL quiche/0.14.0
