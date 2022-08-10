@@ -1,13 +1,11 @@
-FROM alpine:3.14 AS base
-
-LABEL maintainer="macbre <maciej.brencz@gmail.com>"
-
-WORKDIR /opt
-
 # https://github.com/curl/curl/releases 
 ARG CURL_VERSION=curl-7_84_0
 # https://github.com/cloudflare/quiche/releases
 ARG QUICHE_VERSION=0.14.0
+
+FROM alpine:3.14 AS base
+LABEL maintainer="macbre <maciej.brencz@gmail.com>"
+WORKDIR /opt
 
 # install dependency
 RUN apk add --no-cache \
@@ -53,8 +51,20 @@ RUN \
   make && \
   make install
 
+# make our resulting image way smaller
+# from 2.85GB to 44.9MB
+FROM alpine:3.14
+
+ARG CURL_VERSION
+ARG QUICHE_VERSION
+
+ENV CURL_VERSION   $CURL_VERSION
+ENV QUICHE_VERSION $QUICHE_VERSION
+
+COPY --from=base /usr/bin/curl /usr/bin/curl
+COPY --from=base /usr/local/lib/libcurl.so.4 /usr/local/lib/libcurl.so.4
+COPY --from=base /usr/lib/libgcc_s.so.1 /usr/lib/libgcc_s.so.1
+
 # we do not need root anymore
 USER nobody
-
-# TODO: use multi stages to make the image smaller
 RUN env | sort; which curl; curl --version
