@@ -65,7 +65,7 @@ ARG QUICHE_VERSION
 ENV CURL_VERSION   $CURL_VERSION
 ENV QUICHE_VERSION $QUICHE_VERSION
 
-COPY --from=base /usr/bin/curl /usr/bin/curl
+COPY --from=base /usr/local/bin/curl /usr/local/bin/curl
 COPY --from=base /usr/local/lib/libcurl.so.4 /usr/local/lib/libcurl.so.4
 COPY --from=base /usr/lib/libgcc_s.so.1 /usr/lib/libgcc_s.so.1
 
