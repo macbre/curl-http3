@@ -15,12 +15,15 @@ WORKDIR /opt
 RUN apk add --no-cache \
   autoconf \
   automake \
+  brotli-dev \
   build-base \
   cmake \
   git \
   libtool \
+  nghttp2-dev \
   pkgconfig \
-  wget
+  wget \
+  zlib-dev
 
 # set up our home directory
 RUN mkdir -p /root
@@ -51,9 +54,17 @@ RUN \
   git clone -b ${CURL_VERSION} --depth 1 --single-branch https://github.com/curl/curl && \
   cd curl && \
   autoreconf -fi && \
-  ./configure LDFLAGS="-Wl,-rpath,/opt/quiche/target/release" --with-openssl=/opt/quiche/quiche/deps/boringssl/src --with-quiche=/opt/quiche/target/release && \
+  ./configure LDFLAGS="-Wl,-rpath,/opt/quiche/target/release" \
+    --with-brotli \
+    --with-nghttp2 \
+    --with-openssl=/opt/quiche/quiche/deps/boringssl/src \
+    --with-quiche=/opt/quiche/target/release \
+    --with-zlib && \
   make && \
   make install
+
+# so that we know what to copy over from the "base" stage
+RUN ldd $(which curl)
 
 # make our resulting image way smaller
 # from 2.85GB to 44.9MB
@@ -68,6 +79,10 @@ ENV QUICHE_VERSION $QUICHE_VERSION
 COPY --from=base /usr/local/bin/curl /usr/local/bin/curl
 COPY --from=base /usr/local/lib/libcurl.so.4 /usr/local/lib/libcurl.so.4
 COPY --from=base /usr/lib/libgcc_s.so.1 /usr/lib/libgcc_s.so.1
+COPY --from=base /usr/lib/libnghttp2.so.14 /usr/lib/libnghttp2.so.14
+COPY --from=base /usr/lib/libbrotlidec.so.1 /usr/lib/libbrotlidec.so.1
+COPY --from=base /lib/libz.so.1 /lib/libz.so.1
+COPY --from=base /usr/lib/libbrotlicommon.so.1 /usr/lib/libbrotlicommon.so.1
 
 # we do not need root anymore
 USER nobody
