@@ -3,7 +3,7 @@ ARG CURL_VERSION=curl-7_84_0
 # https://github.com/cloudflare/quiche/releases
 ARG QUICHE_VERSION=0.14.0
 
-FROM alpine:3.14 AS base
+FROM alpine:3.16 AS base
 
 ARG CURL_VERSION
 ARG QUICHE_VERSION
@@ -68,7 +68,7 @@ RUN ldd $(which curl)
 
 # make our resulting image way smaller
 # from 2.85GB to 44.9MB
-FROM alpine:3.14
+FROM alpine:3.16
 
 ARG CURL_VERSION
 ARG QUICHE_VERSION
