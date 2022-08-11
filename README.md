@@ -1,7 +1,7 @@
 # curl-http3
 [![Docker Image CI](https://github.com/macbre/curl-http3/actions/workflows/dockerimage.yml/badge.svg)](https://github.com/macbre/curl-http3/actions/workflows/dockerimage.yml)
 
-A custom `curl` build with `BoringSSL` and http3 support via `quiche` in **under 50MB container image**.
+A custom `curl` build with `brotli`, `BoringSSL` and `http3` support (via `quiche`) in **under 50MB container image**.
 
 ```
 curl 7.84.0-DEV (x86_64-pc-linux-musl) libcurl/7.84.0-DEV BoringSSL zlib/1.2.12 brotli/1.0.9 nghttp2/1.47.0 quiche/0.14.0
