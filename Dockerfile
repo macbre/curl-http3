@@ -15,14 +15,14 @@ WORKDIR /opt
 RUN apk add --no-cache \
   autoconf \
   automake \
+  brotli-dev \
   build-base \
   cmake \
   git \
   libtool \
+  nghttp2-dev \
   pkgconfig \
   wget \
-  brotli-dev \
-  nghttp2-dev \
   zlib-dev
 
 # set up our home directory
