@@ -4,10 +4,10 @@
 A custom `curl` build with `BoringSSL` and http3 support via `quiche` in **under 50MB container image**.
 
 ```
-curl 7.84.0-DEV (x86_64-pc-linux-musl) libcurl/7.84.0-DEV BoringSSL quiche/0.14.0
+curl 7.84.0-DEV (x86_64-pc-linux-musl) libcurl/7.84.0-DEV BoringSSL zlib/1.2.12 brotli/1.0.9 nghttp2/1.43.0 quiche/0.14.0
 Release-Date: [unreleased]
-Protocols: dict file ftp ftps gopher gophers http https imap imaps mqtt pop3 pop3s rtsp smb smbs smtp smtps telnet tftp 
-Features: alt-svc AsynchDNS HSTS HTTP3 HTTPS-proxy IPv6 Largefile NTLM NTLM_WB SSL threadsafe UnixSockets
+Protocols: dict file ftp ftps gopher gophers http https imap imaps mqtt pop3 pop3s rtsp smb smbs smtp smtps telnet tftp
+Features: alt-svc AsynchDNS brotli HSTS HTTP2 HTTP3 HTTPS-proxy IPv6 Largefile libz NTLM NTLM_WB SSL threadsafe UnixSockets
 ```
 
 ## Usage
