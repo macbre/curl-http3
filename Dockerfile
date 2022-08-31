@@ -1,5 +1,5 @@
-# https://github.com/curl/curl/releases 
-ARG CURL_VERSION=curl-7_84_0
+# https://github.com/curl/curl/releases
+ARG CURL_VERSION=curl-7_85_0
 # https://github.com/cloudflare/quiche/releases
 ARG QUICHE_VERSION=0.14.0
 
