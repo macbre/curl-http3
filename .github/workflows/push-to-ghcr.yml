@@ -19,7 +19,7 @@ jobs:
 
       # https://github.com/marketplace/actions/push-to-ghcr
       - name: Build and publish a Docker image for macbre/curl-http3
-        uses: macbre/push-to-ghcr@v8
+        uses: macbre/push-to-ghcr@v16
         with:
           image_name: macbre/curl-http3
           github_token: ${{ secrets.GITHUB_TOKEN }}
