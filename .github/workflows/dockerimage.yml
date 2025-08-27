@@ -49,7 +49,7 @@ jobs:
 
     - name: Is http/2 supported?
       run: |
-        docker run --network=host --rm macbre/curl-http3 curl -svo /dev/null http://127.0.0.1:5555/get 2>&1 | grep -i 'HTTP/2'
+        docker run --network=host --rm macbre/curl-http3 curl -svo /dev/null http://127.0.0.1:5555/ 2>&1 | grep -i 'HTTP/2'
 
     - name: Is http/3 supported?
       run: |
