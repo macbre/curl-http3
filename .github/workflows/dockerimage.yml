@@ -38,7 +38,7 @@ jobs:
     - name: curl --version
       run: |
         docker run -t macbre/curl-http3 curl --version
-        curl -v http://127.0.0.1:5555/
+        curl -v http://127.0.0.1:5555/brotli
 
     - name: Is brotli supported?
       run: |
