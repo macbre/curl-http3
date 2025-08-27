@@ -10,6 +10,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      # https://httpbin.org/ is timing out / serving 503 responses, use locally hosted instance
+      # https://github.com/postmanlabs/httpbin
+      httpbin:
+        image: kennethreitz/httpbin
+        ports:
+          - "5555:80"
+
     steps:
     - uses: actions/checkout@v3
 
@@ -25,6 +33,7 @@ jobs:
     - name: Inspect images
       run: |
         docker images | head -n3
+        docker ps
 
     - name: curl --version
       run: |
@@ -32,16 +41,16 @@ jobs:
 
     - name: Is brotli supported?
       run: |
-        docker run --rm macbre/curl-http3 curl -sIL https://httpbin.org/brotli | grep -i 'content-encoding: br'
+        docker run --network=host --rm macbre/curl-http3 curl -svo /dev/null http://127.0.0.1:5555/brotli 2>&1 | grep -i 'content-encoding: br'
 
     - name: Is gzip supported?
       run: |
-        docker run --rm macbre/curl-http3 curl -sIL https://httpbin.org/gzip | grep -i 'content-encoding: gzip'
+        docker run --network=host --rm macbre/curl-http3 curl -svo /dev/null http://127.0.0.1:5555/gzip 2>&1 | grep -i 'content-encoding: gzip'
 
     - name: Is http/2 supported?
       run: |
-        docker run --rm macbre/curl-http3 curl -sIL https://httpbin.org/get | grep -i 'HTTP/2'
+        docker run --rm macbre/curl-http3 curl -svo /dev/null https://example.com/ 2>&1 | grep -i 'HTTP/2 200'
 
     - name: Is http/3 supported?
       run: |
-        docker run --rm macbre/curl-http3 curl -sIL https://blog.cloudflare.com --http3 -H 'user-agent: mozilla' | grep 'HTTP/3'
+        docker run --rm macbre/curl-http3 curl -sIL https://blog.cloudflare.com --http3 -H 'user-agent: mozilla' 2>&1 | grep 'HTTP/3'
