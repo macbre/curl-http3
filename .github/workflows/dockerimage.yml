@@ -15,7 +15,7 @@ jobs:
 
     # https://github.com/marketplace/actions/build-and-push-docker-images
     - name: Build the Docker image
-      uses: docker/build-push-action@v3
+      uses: docker/build-push-action@v6
       with:
         context: .
         tags: macbre/curl-http3
