@@ -1,9 +1,9 @@
 # https://github.com/curl/curl/releases 
-ARG CURL_VERSION=curl-7_84_0
+ARG CURL_VERSION=curl-8_15_0
 # https://github.com/cloudflare/quiche/releases
-ARG QUICHE_VERSION=0.14.0
+ARG QUICHE_VERSION=0.24.5
 
-FROM alpine:3.16 AS base
+FROM alpine:3.22 AS base
 
 ARG CURL_VERSION
 ARG QUICHE_VERSION
