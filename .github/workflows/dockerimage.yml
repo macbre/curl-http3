@@ -41,15 +41,15 @@ jobs:
 
     - name: Is brotli supported?
       run: |
-        docker run --rm macbre/curl-http3 curl -svo /dev/null http://127.0.0.1:5555/brotli | grep -i 'content-encoding: br'
+        docker run --network=host --rm macbre/curl-http3 curl -svo /dev/null http://127.0.0.1:5555/brotli | grep -i 'content-encoding: br'
 
     - name: Is gzip supported?
       run: |
-        docker run --rm macbre/curl-http3 curl -svo /dev/null http://127.0.0.1:5555/gzip | grep -i 'content-encoding: gzip'
+        docker run --network=host --rm macbre/curl-http3 curl -svo /dev/null http://127.0.0.1:5555/gzip | grep -i 'content-encoding: gzip'
 
     - name: Is http/2 supported?
       run: |
-        docker run --rm macbre/curl-http3 curl -svo /dev/null http://127.0.0.1:5555/get | grep -i 'HTTP/2'
+        docker run --network=host --rm macbre/curl-http3 curl -svo /dev/null http://127.0.0.1:5555/get | grep -i 'HTTP/2'
 
     - name: Is http/3 supported?
       run: |
