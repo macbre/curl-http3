@@ -87,6 +87,7 @@ COPY --from=base /usr/lib/libz.so.1 /usr/lib/libz.so.1
 COPY --from=base /usr/lib/libbrotlicommon.so.1 /usr/lib/libbrotlicommon.so.1
 COPY --from=base /usr/lib/libpsl.so.5 /usr/lib/libpsl.so.5
 COPY --from=base /usr/lib/libidn2.so.0 /usr/lib/libidn2.so.0
+COPY --from=base /usr/lib/libunistring.so.5 /usr/lib/libunistring.so.5
 
 # we do not need root anymore
 USER nobody
