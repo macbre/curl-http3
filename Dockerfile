@@ -1,9 +1,9 @@
 # https://github.com/curl/curl/releases 
-ARG CURL_VERSION=curl-7_84_0
+ARG CURL_VERSION=curl-8_15_0
 # https://github.com/cloudflare/quiche/releases
-ARG QUICHE_VERSION=0.14.0
+ARG QUICHE_VERSION=0.24.5
 
-FROM alpine:3.16 AS base
+FROM alpine:3.22 AS base
 
 ARG CURL_VERSION
 ARG QUICHE_VERSION
@@ -20,6 +20,7 @@ RUN apk add --no-cache \
   cmake \
   git \
   libtool \
+  libpsl-dev \
   nghttp2-dev \
   pkgconfig \
   wget \
@@ -76,13 +77,17 @@ ARG QUICHE_VERSION
 ENV CURL_VERSION   $CURL_VERSION
 ENV QUICHE_VERSION $QUICHE_VERSION
 
+# Copy over required dependencies
 COPY --from=base /usr/local/bin/curl /usr/local/bin/curl
 COPY --from=base /usr/local/lib/libcurl.so.4 /usr/local/lib/libcurl.so.4
 COPY --from=base /usr/lib/libgcc_s.so.1 /usr/lib/libgcc_s.so.1
 COPY --from=base /usr/lib/libnghttp2.so.14 /usr/lib/libnghttp2.so.14
 COPY --from=base /usr/lib/libbrotlidec.so.1 /usr/lib/libbrotlidec.so.1
-COPY --from=base /lib/libz.so.1 /lib/libz.so.1
+COPY --from=base /usr/lib/libz.so.1 /usr/lib/libz.so.1
 COPY --from=base /usr/lib/libbrotlicommon.so.1 /usr/lib/libbrotlicommon.so.1
+COPY --from=base /usr/lib/libpsl.so.5 /usr/lib/libpsl.so.5
+COPY --from=base /usr/lib/libidn2.so.0 /usr/lib/libidn2.so.0
+COPY --from=base /usr/lib/libunistring.so.5 /usr/lib/libunistring.so.5
 
 # we do not need root anymore
 USER nobody
