@@ -20,6 +20,7 @@ RUN apk add --no-cache \
   cmake \
   git \
   libtool \
+  libpsl-dev \
   nghttp2-dev \
   pkgconfig \
   wget \
