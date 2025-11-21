@@ -6,7 +6,7 @@ A custom [`curl` build](https://curl.se/ch/) with [`brotli`](https://www.brotli.
 ## The latest version
 
 ```
-curl 8.15.0-DEV (x86_64-pc-linux-musl) libcurl/8.15.0-DEV BoringSSL zlib/1.2.12 brotli/1.1.0 libidn2/2.3.7 libpsl/0.21.5 nghttp2/1.65.0 quiche/0.24.5
+curl 8.17.0-DEV (x86_64-pc-linux-musl) libcurl/8.17.0-DEV BoringSSL zlib/1.3.1 brotli/1.1.0 libidn2/2.3.7 libpsl/0.21.5 nghttp2/1.65.0 quiche/0.24.5
 Release-Date: [unreleased]
 Protocols: dict file ftp ftps gopher gophers http https imap imaps ipfs ipns mqtt pop3 pop3s rtsp smb smbs smtp smtps telnet tftp ws wss
 Features: alt-svc AsynchDNS brotli HSTS HTTP2 HTTP3 HTTPS-proxy IDN IPv6 Largefile libz NTLM PSL SSL threadsafe UnixSockets
