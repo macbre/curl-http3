@@ -1,5 +1,5 @@
 # https://github.com/curl/curl/releases
-ARG CURL_VERSION=curl-8_15_0
+ARG CURL_VERSION=curl-8_17_0
 # https://github.com/cloudflare/quiche/releases
 ARG QUICHE_VERSION=0.24.5
 # https://hub.docker.com/_/alpine
