@@ -1,9 +1,11 @@
-# https://github.com/curl/curl/releases 
+# https://github.com/curl/curl/releases
 ARG CURL_VERSION=curl-8_15_0
 # https://github.com/cloudflare/quiche/releases
 ARG QUICHE_VERSION=0.24.5
+# https://hub.docker.com/_/alpine
+ARG ALPINE_VERSION=3.22
 
-FROM alpine:3.22 AS base
+FROM alpine:${ALPINE_VERSION} AS base
 
 ARG CURL_VERSION
 ARG QUICHE_VERSION
@@ -69,7 +71,7 @@ RUN ldd $(which curl)
 
 # make our resulting image way smaller
 # from 2.85GB to 44.9MB
-FROM alpine:3.16
+FROM alpine:${ALPINE_VERSION}
 
 ARG CURL_VERSION
 ARG QUICHE_VERSION
