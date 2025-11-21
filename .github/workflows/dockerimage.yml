@@ -19,7 +19,7 @@ jobs:
           - "5555:80"
 
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
 
     # https://github.com/marketplace/actions/build-and-push-docker-images
     - name: Build the Docker image
